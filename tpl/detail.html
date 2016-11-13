@@ -1,0 +1,78 @@
+<style>
+    .detail{
+        margin:60px auto;
+    }
+    .panel-footer{
+        margin-top:15px;
+    }
+    .lun_pic{
+        width:50px;
+        height:50px;
+        border:1px solid #ddd;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        border-radius: 25px;
+        overflow: hidden;
+    }
+    .lun_name{
+        padding:7px 20px;
+    }
+    .lun_sec{
+        margin-left:20px;
+        width:100%;
+        word-break: break-all;
+        word-wrap: break-word;
+        padding:15px 15px 0 0 ;
+    }
+</style>
+<div ng-include="'tpl/include/header.html'"></div>
+<div class="container detail">
+    <ol class="breadcrumb">
+        <li><a href="#/main">作品</a></li>
+        <li class="active">详情</li>
+    </ol>
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <h3 >{{detail.name}}</h3>
+            <hr>
+            <div class="panel">
+                <div class="panel-body">
+                    <img class="img-responsive" style="width:100%" ng-src="{{detail.pic}}" alt="...">
+                </div>
+                <div class="panel-footer">
+                    <h3><b>【老师评语】</b></h3>
+                    <p>{{detail.teacherP}}</p>
+                    <h3 class="text-danger"><b>{{detail.score }}</b></h3>
+                </div>
+                <div ng-repeat="tmp in detail2" class="panel-footer">
+                    <span class="pull-right">{{tmp.ltime | date:'yyyy-MM-dd '}}</span>
+                    <h4><b>同学交流：</b></h4>
+                    <div class="clearfix">
+                        <div class="lun_pic pull-left">
+                            <img class="img-responsive " ng-src="{{tmp.lpic}}" alt=""/>
+
+                        </div>
+                        <h5 class="pull-left lun_name">{{tmp.lname=='undefined'?locatName:tmp.lname}}</h5>
+                        <p class="pull-left lun_sec">{{tmp.lun}}</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-xs-6">
+                    <a ng-click="jump('/pin/'+detail.hid)"   class=" btn btn-default btn-success btn-block" >我要评论</a>
+                </div>
+                <div class="col-xs-6">
+                    <a class=" btn btn-default btn-warning btn-block" ng-click="jump('/main')">我再看看</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div ng-include="'tpl/include/footer.html'"></div>

@@ -1,0 +1,25 @@
+<style>
+    .pin{
+        margin:60px auto;
+    }
+</style>
+<div ng-include="'tpl/include/header.html'"></div>
+<div class="container pin">
+    <ol class="breadcrumb">
+        <li><a href="#/detail/{{hid}}">详情</a></li>
+        <li class="active">评论</li>
+    </ol>
+    <form ng-hide="ishide||islogin" action="" class="form_pin">
+        <div class="form-group">
+            <label class="sr-only"></label>
+            <textarea ng-model="txt" class="form-control" placeholder="请输入评论内容" style="height:200px"></textarea>
+            <span>{{size}}/120</span>
+        </div>
+        <button type="button" ng-click="submiiTxt()" ng-disabled='isSure' class="btn btn-success btn-block">提交</button>
+    </form>
+    <p ng-hide="!ishide" class="alert alert-success">提交成功</p>
+    <p ng-hide="isShow" class="alert alert-danger">提交失败</p>
+    <p ng-show="islogin" class="alert alert-danger">没有登录 <a href="#/login">跳转回登录页面</a></p>
+</div>
+
+<div ng-include="'tpl/include/footer.html'"></div>

@@ -1,0 +1,39 @@
+<style>
+    .detail{
+        margin:60px auto;
+    }
+    .panel-footer{
+        margin-top:15px;
+    }
+</style>
+<div ng-include="'tpl/include/header.html'"></div>
+<div class="container detail">
+    <ol class="breadcrumb">
+        <li><a href="#/project">作品</a></li>
+        <li class="active">详情</li>
+    </ol>
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <h3 >{{prodetail.name}}</h3>
+            <hr>
+            <div class="panel">
+                <div class="panel-body">
+                    <img class="img-responsive" style="width:100%" ng-src="{{prodetail.pic}}" alt="...">
+                </div>
+                <div class="panel-footer">
+                    <h3><b>老师评语：</b></h3>
+                    <p>{{prodetail.teacherP}}</p>
+                    <span class="text-danger"><b>{{prodetail.score}}</b></span>
+                </div>
+                <div class="panel-footer">
+                    <h4><b>同学交流：</b>{{detail.material}}</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis facilis fugit magni necessitatibus nisi obcaecati porro possimus quis quod ullam? Amet, consequatur cum ducimus eveniet maiores molestias odio ullam. Nisi!</p>
+                    <span class="text-danger"><b>{{detail.price | currency:'￥'}}</b></span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<div ng-include="'tpl/include/footer.html'"></div>

@@ -1,0 +1,188 @@
+<style>
+    .main{
+        margin:60px auto;
+    }
+    .pro{
+        margin-top:20px;
+    }
+    .huaList>.col-xs-4{
+        padding-left:15px;
+        padding-right:0px;
+    }
+    .huaList>.col-xs-4>a{
+        color:#333;
+    }
+    .huaList>.col-xs-4:first-child{
+        padding-left:15px;
+        padding-right:0px;
+    }
+    .addMore{
+        margin-top:20px;
+    }
+</style>
+<div ng-include="'tpl/include/header.html'"></div>
+<div class="container main">
+    <div class="form-group has-feedback search">
+        <label class="sr-only">搜索</label>
+        <input ng-model="kw" type="text" class="form-control"/>
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+    </div>
+    <!-- <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="3000"> -->
+        <!-- <ol class="carousel-indicators"> -->
+            <!-- <li data-target="#carousel" data-slide-to="0" class="active"></li> -->
+            <!-- <li data-target="#carousel" data-slide-to="1"></li> -->
+            <!-- <li data-target="#carousel" data-slide-to="2"></li> -->
+        <!-- </ol> -->
+        <!-- <div class="carousel-inner"> -->
+            <!-- <div class="item active"> -->
+                <!-- <img class="img-responsive" src="img/557af084f321f_03.jpg" alt=""/> -->
+            <!-- </div> -->
+            <!-- <div class="item"> -->
+                <!-- <img class="img-responsive" src="img/557af084f321f_03.jpg" alt=""/> -->
+            <!-- </div> -->
+            <!-- <div class="item"> -->
+                <!-- <img class="img-responsive" src="img/557af084f321f_03.jpg" alt=""/> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+	<div class="carousel slide" id="ad" data-ride="carousel" data-interval="2000">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img class="img-responsive" src="img/557af084f321f_03.jpg" alt=""/>
+        </div>
+        <div class="item">
+          <img class="img-responsive" src="img/557af084f321f_03.jpg" alt=""/>
+        </div>
+        <div class="item">
+          <img class="img-responsive" src="img/557af084f321f_03.jpg" alt=""/>
+        </div>
+        <div class="item">
+          <img class="img-responsive" src="img/557af084f321f_03.jpg" alt=""/>
+        </div>
+      </div>
+
+      <a class="carousel-control left" data-target="#ad" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="carousel-control right" data-target="#ad" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+      
+    </div>
+    <div class="row">
+        <div ng-repeat="tmp in data" class="col-xs-6 pro">
+            <a href="#/detail/{{tmp.hid}}"><img  class="img-responsive" ng-src="{{tmp.pic}}" /></a>
+            <div class="row">
+                <div class="col-xs-12"><h5>【{{tmp.name}}】</h5></div>
+                <div class="col-xs-12">
+                    <div class="row huaList">
+                        <div class="col-xs-4">
+                            <a href=""> <span class="glyphicon glyphicon-eye-open"></span>{{tmp.look}}</a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href=""> <span class="glyphicon glyphicon-comment"></span>{{tmp.liuyan}}</a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href=""> <span class="glyphicon glyphicon-thumbs-up"></span>{{tmp.zan}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-xs-6 pro">-->
+            <!--<img class="img-responsive" src="img/c02-lg.jpg" />-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">某某学员的优秀作品</div>-->
+                <!--<div class="col-xs-12">-->
+                    <!--<div class="row huaList">-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-eye-open"></span>10</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-comment"></span>12</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-thumbs-up"></span>8</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6 pro">-->
+            <!--<img class="img-responsive" src="img/m_02-lg.jpg" />-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">某某学员的优秀作品</div>-->
+                <!--<div class="col-xs-12">-->
+                    <!--<div class="row huaList">-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-eye-open"></span>10</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-comment"></span>12</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-thumbs-up"></span>8</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6 pro">-->
+            <!--<img class="img-responsive" src="img/s04-lg.jpg" />-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">某某学员的优秀作品</div>-->
+                <!--<div class="col-xs-12">-->
+                    <!--<div class="row huaList">-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-eye-open"></span>10</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-comment"></span>12</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-thumbs-up"></span>8</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6 pro">-->
+            <!--<img class="img-responsive" src="img/s01-lg.jpg" />-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">某某学员的优秀作品</div>-->
+                <!--<div class="col-xs-12">-->
+                    <!--<div class="row huaList">-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-eye-open"></span>10</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-comment"></span>12</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-thumbs-up"></span>8</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6 pro">-->
+            <!--<img class="img-responsive" src="img/s03-lg.jpg" />-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">某某学员的优秀作品</div>-->
+                <!--<div class="col-xs-12">-->
+                    <!--<div class="row huaList">-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-eye-open"></span>10</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-comment"></span>12</a>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4">-->
+                            <!--<a href=""> <span class="glyphicon glyphicon-thumbs-up"></span>8</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <button type="button" ng-hide="!hasMore" ng-click="loadMore()" class="btn btn-success btn-block addMore">加载更多</button>
+    <div ng-hide="hasMore" class="alert alert-danger">没有了</div>
+</div>
+<div ng-include="'tpl/include/footer.html'"></div>

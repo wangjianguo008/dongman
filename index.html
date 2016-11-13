@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css"/>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/angular-animate.js"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            overflow-x: hidden;
+        }
+        .div_view{
+            width:100%;
+            height:700px;
+        }
+        .huimei{
+            transition: all linear 0.3s;
+            position: absolute;
+            left:0;
+        }
+        .huimei.ng-enter{
+            left:100%;
+        }
+        .huimei.ng-enter-active{
+            left:0%;
+        }
+        .huimei.ng-leave{
+            left:0%;
+        }
+        .huimei.ng-leave-active{
+            left:-100%;
+        }
+        .container{
+            margin:0 auto;
+        }
+    </style>
+</head>
+<body ng-controller="parentCtrl">
+    <div ng-view class="div_view huimei" >11</div>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+    <script>
+        var app=angular.module('myApp',['ng','ngRoute','ngAnimate']);
+        app.config(function($routeProvider){
+            $routeProvider
+                    .when('/start',{
+                        templateUrl:'tpl/start.html',
+                        controller:'startCtrl'
+                    })
+                    .when('/login',{
+                        templateUrl:'tpl/login.html',
+                        controller:'loginCtrl'
+                    })
+                    .when('/main',{
+                        templateUrl:'tpl/main.html',
+                        controller:'mainCtrl'
+                    })
+                    .when('/detail/:hid',{
+                        templateUrl:'tpl/detail.html',
+                        controller:'deatilCtrl'
+                    })
+                    .when('/pin/:hid',{
+                        templateUrl:'tpl/pinlun.html',
+                        controller:'pinCtrl'
+                    })
+                    .when('/register',{
+                        templateUrl:'tpl/register.html',
+                        controller:'registerCtrl'
+                    })
+                    .when('/score',{
+                        templateUrl:'tpl/score.html'
+                    })
+                    .when('/teacher',{
+                        templateUrl:'tpl/teacher.html'
+                    })
+                    .when('/project',{
+                        templateUrl:'tpl/project.html',
+                        controller:'projectCtrl'
+                    })
+                    .when('/upload',{
+                        templateUrl:'tpl/upload.html'
+                    })
+                    .when('/detail2/:hid',{
+                        templateUrl:'tpl/detail2.html',
+                        controller:'detail2Ctrl'
+                    })
+                    .when('/myOrder',{
+                        templateUrl:'tpl/myOrder.html',
+                        controller:'myOrderCtrl'
+                    })
+                    .otherwise('/start',{templateUrl:'tpl/start.html'})
+        })
+
+        app.controller('parentCtrl',['$scope','$location','$rootScope',function($scope,$location,$rootScope){
+            if(!$rootScope.locatName){
+                $rootScope.nologin=true;
+            }else{
+                $rootScope.nologin=false;
+            }
+
+            if(!$rootScope.locatName){
+                $location.path('/start');
+                window.scrollTo(0,0);
+            }
+            $scope.active=false;
+            $scope.openShow=function(){
+                $scope.active=true;
+                console.log($scope.active);
+            }
+            $scope.closeShow=function(){
+                $scope.active=false;
+                console.log($scope.active);
+            }
+            $scope.jump=function(url){
+                $location.path(url);
+                window.scrollTo(0,0);
+                $scope.active=false;
+            }
+            $scope.removeLogin=function(){
+                $rootScope.locatName=null;
+                $location.path('/start');
+                window.scrollTo(0,0);
+                $scope.active=false;
+                $rootScope.nologin=true;
+                localStorage.removeItem('myKey');
+            }
+        }])
+        app.controller('detail2Ctrl',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
+            $http.get('data/getHidPage.php?hid='+$routeParams.hid).success(function(data){
+                console.log(data);
+                $scope.prodetail=data[0];
+            });
+        }])
+        app.controller('projectCtrl',['$scope','$http','$rootScope',function($scope,$http,$rootScope){
+            $http.get('data/getproject.php?name='+$rootScope.locatName).success(function(data){
+                console.log(data);
+                $scope.proList=data;
+            });
+        }])
+        app.controller('startCtrl',['$scope','$rootScope','$location','$http','$timeout',function($scope,$rootScope,$location,$http,$timeout){
+            var json=localStorage.getItem('myKey');
+            json=JSON.parse(json);
+            //console.log(json);
+            if(json){
+                var str=jQuery.param(json);
+                //console.log(str);
+                $http.get('data/login.php?'+str).success(function(data){
+                    if(data.code==1000){
+
+                        $rootScope.locatName=json['name'];
+                        console.log('name :   '+$rootScope.locatName);
+                        $timeout(function(){
+                            $location.path('/main');
+                        },3000);
+
+                        if(!$rootScope.locatName){
+                            $rootScope.nologin=true;
+                        }else{
+                            $rootScope.nologin=false;
+                        }
+
+                    }else{
+                        $scope.isSure=true;
+                        $timeout(function(){
+                            $scope.isSure=false;
+                            $location.path('/login');
+                        },3000);
+
+                    }
+                })
+            }else{
+                $timeout(function(){
+                    if(!$rootScope.locatName){
+                        $location.path('/login');
+                    }else{
+                        $location.path('/main');
+                    }
+
+                },3000);
+            }
+
+            //console.log('$rootScope.locatName'+$rootScope.locatName);
+            $scope.jumps=function(url){
+                if($rootScope.locatName){
+                    $location.path('/main');
+                }else{
+                    $location.path(url);
+                }
+
+            }
+        }])
+        app.controller('myOrderCtrl',['$scope','$rootScope','$http','$timeout',function($scope,$rootScope,$http,$timeout){
+            $scope.isGai=false;
+            $scope.isGai=false;
+            $http.get('data/getZname.php?uname='+$rootScope.locatName).success(function(data){
+               // console.log(data);
+                $scope.gName=(data[0].zname=='undefined'?$rootScope.locatName:data[0].zname);
+            })
+            $scope.gaiName=function(){
+               // console.log($scope.zname);
+                if($scope.zname){
+                    $http.get('data/gaiName.php?zname='+$scope.zname+'&uname='+$rootScope.locatName).success(function(data){
+                        // console.log(data);
+                        $scope.gName=$scope.zname;
+                    })
+                }
+
+            }
+            $scope.$watch('pwd',function(){
+                $http.get('data/login.php?name='+$rootScope.locatName+'&pwd='+$scope.pwd).success(function(data){
+                    if(data.code==1000){
+                        $scope.isclick=false;
+                        console.log(true);
+
+                    }else{
+                        $scope.isclick=true;
+                        console.log(false);
+                    }
+                })
+            })
+
+            $scope.gaiPwd=function(){
+                //console.log($scope.pwds);
+                $http.get('data/gaipwd.php?name='+$rootScope.locatName+'&pwd='+$scope.pwds).success(function(data){
+                    if(data=='succ'){
+                        console.log('succ');
+                        $scope.isGai=true;
+                        $scope.noGai=false;
+                        $scope.pwd='';
+                        $scope.pwds='';
+                    }else{
+                        $scope.isGai=false;
+                        $scope.noGai=true;
+                    }
+                    $timeout(function(){
+                        $scope.isGai=false;
+                        $scope.isGai=false;
+                    },3000);
+                });
+            }
+        }])
+        app.controller('mainCtrl',['$scope','$http',function($scope,$http){
+            $http.get('data/dish_getbypage.php?start=0').success(function(data){
+                //console.log(data);
+                $scope.data=data;
+            });
+            $scope.kw="";
+            $scope.data=0;
+            $scope.hasMore=true;
+            //加载更多
+            $scope.loadMore=function(){
+                $http.get('data/dish_getbypage.php?start='+$scope.data.length).success(function(data){
+                    if(data.length<5){
+                        $scope.hasMore=false;
+                    }
+                    $scope.data=$scope.data.concat(data);
+                })
+            }
+            //默认加载第一页
+            $http.get('data/dish_getbypage.php?start=0').success(function(data){
+                //console.log(data);
+                $scope.data=data;
+            });
+            //搜索功能
+            $scope.$watch('kw',function(){
+                if($scope.kw!=""){
+                    $http.get('data/dish_getbykw.php?kw='+$scope.kw).success(function(data){
+                        $scope.data=data;
+                    })
+                }
+
+            })
+        }])
+        app.controller('loginCtrl',['$scope','$http','$location','$rootScope','$timeout',function($scope,$http,$location,$rootScope,$timeout){
+            var json=localStorage.getItem('myKey');
+            json=JSON.parse(json);
+            //console.log(json);
+            if(json){
+                $scope.user={'name':json.name,'pwd':json.pwd};
+            }
+
+
+            $scope.isSure=false;
+            $scope.submitLogin=function(){
+                //console.log($scope.user);
+                var str=jQuery.param($scope.user);
+                //console.log(str);
+                $http.get('data/login.php?'+str).success(function(data){
+                    if(data.code==1000){
+                        $location.path('/main');
+                        $rootScope.locatName=$scope.user['name'];
+                        //console.log('name :   '+$rootScope.locatName);
+                        localStorage.setItem('myKey', JSON.stringify($scope.user));
+                        if(!$rootScope.locatName){
+                            $rootScope.nologin=true;
+                        }else{
+                            $rootScope.nologin=false;
+                        }
+
+                    }else{
+                        $scope.isSure=true;
+                        $timeout(function(){
+                            $scope.isSure=false;
+                        },3000);
+                    }
+                })
+            }
+
+
+        }])
+        app.controller('registerCtrl',['$scope','$http','$location','$rootScope','$timeout',function($scope,$http,$location,$rootScope,$timeout){
+            var reg=/^[A-Z][a-zA-z0-9]{5,12}$/;
+            var regpwd=/^[a-zA-z0-9]{6,12}$/;
+            var bollName=false;
+            var bollPwd=false;
+            var bollPwds=false;
+            $scope.isSure=false;
+            //console.log(bollName,bollPwd,bollPwds);
+            $scope.$watch('uname', function () {
+                bollName=reg.test($scope.uname);
+                $scope.user={'name':$scope.uname,'pwd':$scope.pwd,'pwds':$scope.pwds};
+            })
+            $scope.$watch('pwd', function () {
+                bollPwd=regpwd.test($scope.pwd);
+                if(!$scope.pwd){
+                    bollPwd=false;
+                }
+                $scope.user={'name':$scope.uname,'pwd':$scope.pwd,'pwds':$scope.pwds};
+            })
+            $scope.$watch('pwds', function () {
+                bollPwds=($scope.pwd==$scope.pwds);
+                $scope.user={'name':$scope.uname,'pwd':$scope.pwd,'pwds':$scope.pwds};
+            })
+            $scope.submitRegister=function(){
+                if(bollName&&bollPwd&&bollPwds){
+                    //console.log(bollName,bollPwd,bollPwds);
+                    var str=jQuery.param($scope.user);
+                    //console.log(str);
+                    $http.get('data/register.php?'+str).success(function(data){
+                        //console.log(data);
+                        if(data=='succ'){
+                            $rootScope.locatName=$scope.uname;
+                            if(!$rootScope.locatName){
+                                $rootScope.nologin=true;
+                            }else{
+                                $rootScope.nologin=false;
+                            }
+                            //console.log($rootScope.locatName);
+                            $location.path('/main');
+                        }
+                    })
+                }else{
+                    $scope.isSure=true;
+                    $timeout(function(){
+                        $scope.isSure=false;
+                    },3000)
+                }
+
+            }
+        }])
+        app.controller('pinCtrl',['$scope','$routeParams','$http','$rootScope',function($scope,$routeParams,$http,$rootScope){
+
+            if(!$rootScope.locatName){
+                $rootScope.islogin=true;
+            }else{
+                $rootScope.islogin=false;
+            }
+            $scope.isSure=false;
+            $scope.ishide=false;
+            $scope.isShow=true;
+            $scope.hid=$routeParams.hid;
+            $scope.$watch('txt',function(){
+                var str=String($scope.txt);
+                //console.log(str);
+                $scope.size=str.length;
+                if(str.length>120 || str.length==0 || str=='undefined'){
+                    $scope.isSure=true;
+                }else{
+                    $scope.isSure=false;
+                }
+
+
+            })
+            var ltime=String((new Date())/1);
+            var uname=$rootScope.locatName;
+            $scope.submiiTxt=function(){
+                //console.log(uname);
+                $http.get('data/WritePin.php?lun='+$scope.txt+'&lHID='+$routeParams.hid+'&ltime='+ltime+'&uname='+uname).success(function(data){
+                    if(data.msg=='succ'){
+                        $scope.ishide=true;
+                    }else{
+                        $scope.ishide=false;
+                        $scope.isShow=false;
+                    }
+                })
+            }
+
+
+        }])
+        app.controller('deatilCtrl',['$scope','$routeParams','$http',function($scope,$routeParams,$http){
+           //console.log($routeParams.hid);
+            $http.get('data/getHidPage.php?hid='+$routeParams.hid).success(function(data){
+                $scope.detail=data[0];
+            });
+            $http.get('data/getHidLun.php?hid='+$routeParams.hid).success(function(data){
+                $scope.detail2=data;
+                //console.log( $scope.detail2);
+            });
+        }])
+    </script>
+</body>
+</html>

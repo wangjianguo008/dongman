@@ -1,0 +1,163 @@
+<style>
+	.main{
+        margin:60px auto;
+    }
+	.middle{
+		/*vertical-align:center;*/
+		margin-top:14px;
+		margin-left:3px;
+	}
+	.media-body{
+		padding:15px 0;
+	}
+	.media-body>p{
+		color:#333;
+	}
+	.media-left{
+		width:60%;
+	}
+</style>
+
+<div ng-include="'tpl/include/header.html'"></div>
+
+<div class="container main">
+	
+	<div class="form-group has-feedback search">
+		<input ng-model='kw' type="text" class="form-control" placeholder="请输入作品名称..." />
+		<span class="form-control-feedback glyphicon glyphicon-search"></span>
+	</div>
+
+
+	<div class="list-group" ng-repeat="tmp in proList">
+		<!-- 第一副 -->
+		<a href="#/detail2/{{tmp.hid}}">
+			<div class="media list-group-item">
+				<div class="media-left">
+					<img ng-src="{{tmp.pic}}" class="media-object img-responsive img-rounded" alt="" />
+				</div>
+
+				<div class="media-body">
+					<h4>【{{tmp.type}}】</h4>
+
+					<p>{{(tmp.proWrite).substr(0,20).concat('...')}}</p>
+
+				</div>
+
+			</div>
+		</a>
+
+	</div>
+	<!--<div class="list-group">-->
+		<!--&lt;!&ndash; 第一副 &ndash;&gt;-->
+		<!--<a href="#/detail2">-->
+			<!--<div class="media list-group-item">-->
+				<!--<div class="media-left">-->
+					<!--<img src="img/557af084f321f_02_05.jpg" class="middle img-rounded" alt="" />-->
+				<!--</div>-->
+
+				<!--<div class="media-body">-->
+					<!--<h4>【水粉静物】</h4>-->
+
+					<!--<p>作品描述：了解疯狂减肥了 了沙发上了客服....</p>-->
+
+				<!--</div>-->
+
+			<!--</div>-->
+		<!--</a>-->
+
+	<!--</div>-->
+	<!--<div class="list-group">-->
+		<!--&lt;!&ndash; 第一副 &ndash;&gt;-->
+		<!--<a href="#/detail2">-->
+		<!--<div class="media list-group-item">-->
+			<!--<div class="media-left">-->
+				<!--<img src="img/557af084f321f_02_05.jpg" class="middle img-rounded" alt="" />-->
+			<!--</div>-->
+
+			<!--<div class="media-body">-->
+				<!--<h4>【水粉静物】</h4>-->
+
+				<!--<p>作品描述：了解疯狂减肥了 了沙发上了客服....</p>-->
+
+			<!--</div>-->
+
+		<!--</div>-->
+		<!--</a>-->
+	<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div ng-include="'tpl/include/footer.html'"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

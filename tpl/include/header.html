@@ -1,0 +1,117 @@
+<style>
+    .touxiang{
+        width:40px;
+        height:40px;
+        border:1px solid #ddd;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        float: right;
+        margin:5px 10px;
+        overflow: hidden;
+        padding:5px;
+    }
+    .myOrder{
+        position: fixed;
+        top:0;
+        bottom:0;
+        left: 0;
+        width:300px;
+        background-color:rgba(37,52,71,.9);
+        z-index: 1200;
+        transition: all linear 0.5s;
+    }
+    .myOrder.ng-hide{
+        top:0px;
+        left: -100%;
+    }
+    .logo_box{
+        margin-top:80px;
+        text-align: center;
+        color:#fff;
+    }
+    .myselfList{
+        margin-top:20px;
+    }
+
+    .myselfList>li>a{
+        display:inline-block;
+        width:100%;
+        height:50px;
+        background-color:transparent;
+        border:none;
+        line-height: 50px;
+        padding-left: 20px;
+        text-decoration: none;
+        color:#fff;
+        font-size: 1.3em;
+    }
+    .myselfList>li>a:hover{
+        background-color:#1d354d;
+    }
+    @media screen and (max-height: 550px){
+        .myselfList>li>a{
+            height:30px;
+            line-height: 30px;
+        }
+    }
+    @media screen and (min-height: 800px){
+        .myselfList>li>a{
+            height:80px;
+            line-height: 80px;
+        }
+    }
+    .closeLogin{
+        position: absolute;
+        bottom:20px;
+        width:100%;
+        padding: 0 10px;
+    }
+    .closeMyOrder{
+        padding:0px 8px;
+        position: absolute;
+        top:5px;
+        right:5px;
+        color:#fff;
+        font-size: 1.5em;
+        border:1px solid #ddd;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#/start" class="navbar-brand">绘美</a>
+            <div class="touxiang">
+                <a href="" ng-click="openShow()"><img class="img-responsive" src="img/pop.png" alt=""/></a>
+            </div>
+        </div>
+        <div class="navbar-collapse"></div>
+    </div>
+</div>
+<div class="myOrder " ng-show='active'>
+    <span class="closeMyOrder" ng-click="closeShow()">&times;</span>
+    <div class="row logo_box">
+        <div class="col-xs-6 col-xs-offset-3">
+            <img class="img-responsive" src="img/logo.png" style='width:160px;' alt=""/>
+            <h1>绘美</h1>
+        </div>
+    </div>
+    <ul class="list-group myselfList" ng-hide="nologin">
+        <li><a ng-click="jump('/myOrder')">我的中心</a></li>
+        <li><a ng-click="jump('/project')">作品</a></li>
+        <li><a ng-click="jump('/upload')">上传</a></li>
+        <li><a ng-click="jump('/score')">成绩</a></li>
+        <li><a ng-click="jump('/teacher')">教师</a></li>
+
+    </ul>
+    
+    <div class="closeLogin">
+        <a href="#/login" class="btn btn-danger btn-block" ng-show="nologin">没有登录</a>
+        <a ng-hide="nologin" ng-click="removeLogin()" href="" class="btn btn-danger btn-block">退出当前登录</a>
+    </div>
+
+</div>

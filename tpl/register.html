@@ -1,0 +1,75 @@
+<style>
+    .form_login{
+        margin-top:25px;
+    }
+    .bg_img{
+        background: url(img/bg.jpg) no-repeat;
+        background-attachment: fixed;
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+    .logo{
+        margin-top:100px;
+        margin-bottom:30px;
+    }
+    .logo>img{
+        max-width:100%;
+    }
+    .logo_bottom{
+        margin-top:20px;
+
+    }
+</style>
+<div class="container box">
+    <div class="bg_img"></div>
+    <div class="row ">
+        <div class="col-xs-12 logo">
+            <img src="img/logo.png" alt=""/>
+        </div>
+        <div class="col-xs-12">
+            <form class="form_login" action="">
+                <div class="form-group">
+                    <label class="sr-only">用户名</label>
+                    <input ng-model="uname"  class="form-control" placeholder="用户名(首字母大写6-12)"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">密码</label>
+                    <input ng-model="pwd" class="form-control" placeholder="密码(6-12)"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">重复密码</label>
+                    <input ng-model="pwds" class="form-control" placeholder="重复密码"/>
+                </div>
+                <div class="form-group">
+                    <button ng-click="submitRegister()" ng-disabled='!pwds' type="button" class="btn btn-success btn-block">注册</button>
+                    <a href="#/login" class="btn btn-block btn-info">登录</a>
+                </div>
+                <div class="form-group">
+                    <div ng-show="isSure" class="alert alert-danger">用户名或密码不符合规则</div>
+                </div>
+            </form>
+            <form ng-hide="true" class="form_login" action="">
+                <div class="form-group">
+                    <label class="sr-only">用户名</label>
+                    <input ng-model="user.name"  class="form-control" placeholder="用户名(首字母大写)"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">密码</label>
+                    <input ng-model="user.pwd" class="form-control" placeholder="密码(6-12)"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">重复密码</label>
+                    <input ng-model="user.pwds" class="form-control" placeholder="重复密码"/>
+                </div>
+                <div class="form-group">
+                    <button ng-click="submitRegister()" type="button" class="btn btn-success btn-block">注册</button>
+                    <a href="/login" class="btn btn-success btn-block">登录</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

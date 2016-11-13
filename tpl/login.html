@@ -1,0 +1,58 @@
+<style>
+    .form_login{
+        margin-top:25px;
+    }
+    .bg_img{
+        background: url(img/bg.jpg) no-repeat;
+        background-attachment: fixed;
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+    .logo{
+        margin-top:100px;
+        margin-bottom:30px;
+        text-align: center;
+    }
+    .logo>img{
+        max-width:100%;
+    }
+    .logo_bottom{
+        margin-top:20px;
+
+    }
+</style>
+<div class="container box">
+    <div class="bg_img"></div>
+    <div class="row ">
+        <div class="col-xs-12 logo">
+            <img src="img/logo.png" alt=""/>
+        </div>
+        <div class="col-xs-12">
+            <form class="form_login" action="">
+                <div class="form-group">
+                    <label class="sr-only">用户名</label>
+                    <input type="text" ng-model="user.name"  class="form-control" placeholder="用户名"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">密码</label>
+                    <input type="password" ng-model="user.pwd"  class="form-control" placeholder="密码"/>
+                </div>
+                <div class="form-group">
+                    <button type="button" ng-click="submitLogin()"  class="btn btn-success btn-block">登录</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" ng-click="jump('/register')" class="btn btn-warning btn-block">注册</button>
+                </div>
+                <div class="form-group">
+                    <a ng-click="jump('/main')" class="btn btn-block btn-info">跳过</a>
+                </div>
+                <div class="form-group">
+                    <div ng-show="isSure" class="alert alert-danger">用户名或密码错误!!!</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<style>
+    .myOrder1{
+        margin:60px auto;
+    }
+    .DropPwd{
+        margin-top:20px;
+    }
+</style>
+<div ng-include="'tpl/include/header.html'"></div>
+<div class="container myOrder1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>个人信息</h4>
+        </div>
+        <div class="panel-body">
+            <p>姓名：{{gName}} <button ng-click="gaiName()"  class="btn btn-info btn-sm pull-right">修改姓名</button></p>
+            <p>性别：女 </p>
+            <p>备注：</p>
+            <form action="">
+                <div class="form-group">
+                    <label class="sr-only">用户名:</label>
+                    <input ng-model="zname" type="text" class="form-control" placeholder="修改姓名"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>密码设置</h4>
+        </div>
+        <div class="panel-body">
+            <p>密码：******* <button ng-click="gaiPwd()" type="button" class="btn btn-info btn-sm pull-right" ng-disabled="isclick">修改密码</button></p>
+            <form action="" class="DropPwd">
+                <div class="form-group">
+                    <label class="sr-only">修改密码</label>
+                    <input ng-model="pwd" type="text" class="form-control" placeholder="输入原始密码"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">修改密码</label>
+                    <input ng-model="pwds" type="text" class="form-control" placeholder="输入新密码"/>
+                </div>
+                <div class="form-group">
+                    <p ng-show="isGai" class="alert alert-success">修改成功</p>
+                </div>
+                <div class="form-group">
+                    <p ng-show="noGai" class="alert alert-danger">修改失败</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div ng-include="'tpl/include/footer.html'"></div>
